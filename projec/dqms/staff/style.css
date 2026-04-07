@@ -1,0 +1,699 @@
+/* Staff Dashboard CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-content h1 {
+    font-size: 2.5em;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.header-content .subtitle {
+    font-size: 1.1em;
+    margin-top: 5px;
+    opacity: 0.9;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+.dashboard-section {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 1400px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.column-actions {
+    /* First column - Call Next and Mark as Served */
+}
+
+.column-tracking {
+    /* Second column - Service Tracking */
+}
+
+.column-waiting {
+    /* Third column - Waiting List */
+}
+
+.current-serving-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.current-serving-card h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.current {
+    font-size: 3.5em;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+}
+
+.countdown-display {
+    font-size: 1.2em;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.countdown-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    margin-right: 5px;
+}
+
+.ticket-number {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px 30px;
+    border-radius: 8px;
+    min-width: 150px;
+}
+
+.waiting-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.button-group .btn {
+    width: 100%;
+}
+
+.total-badge {
+    background: #667eea;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.service-tracking-card {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+.service-tracking-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    opacity: 0.95;
+}
+
+.tracking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.tracking-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tracking-item label {
+    font-size: 0.85em;
+    opacity: 0.85;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.tracking-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+.tracking-elapsed-row {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.tracking-elapsed-row label {
+    font-size: 0.9em;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.tracking-elapsed-row .tracking-value {
+    font-size: 1.8em;
+}
+
+@keyframes blink {
+    0%, 49% {
+        opacity: 1;
+    }
+    50%, 100% {
+        opacity: 0.3;
+    }
+}
+
+.tracking-value.blinking {
+    animation: blink 1.5s infinite;
+}
+
+.service-tracking-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.service-tracking-section .service-tracking-card {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.capsule-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.95em;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+}
+
+.capsule-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.capsule-btn:active {
+    transform: translateY(0);
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.btn {
+    width: 100%;
+    font-size: 1.1em;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.6);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.6);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+}
+
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Disabled button states */
+.btn:disabled,
+.btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    transform: none;
+}
+
+.btn-primary:disabled,
+.btn-primary[disabled] {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    box-shadow: none;
+}
+
+.btn-success:disabled,
+.btn-success[disabled] {
+    background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+    box-shadow: none;
+}
+
+.btn-warning:disabled,
+.btn-warning[disabled] {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    box-shadow: none;
+}
+
+.countdown-timer {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.pulse-animation {
+    animation: pulse 1s ease-in-out infinite !important;
+}
+
+.dashboard-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.waiting-section {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#waitingList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#waitingList li {
+    padding: 12px 15px;
+    background: white;
+    border-bottom: 1px solid #eee;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+#waitingList li:hover {
+    background: #f0f0f0;
+    transform: translateX(5px);
+}
+
+#waitingList li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .header-content h1 {
+        font-size: 1.8em;
+    }
+
+    .header-content .subtitle {
+        font-size: 0.95em;
+    }
+
+    .container {
+        padding: 30px 15px;
+        align-items: flex-start;
+    }
+
+    .dashboard-section {
+        padding: 30px 20px;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .current-serving-card {
+        padding: 25px;
+        margin-bottom: 0;
+    }
+
+    .current-serving-card h2 {
+        font-size: 1.3em;
+    }
+
+    .current {
+        font-size: 2.5em;
+        letter-spacing: 3px;
+    }
+
+    .countdown-display {
+        font-size: 1em;
+        padding: 8px 16px;
+        margin-top: 8px;
+    }
+
+    .countdown-value {
+        font-size: 1.3em;
+    }
+
+    .button-group {
+        gap: 8px;
+    }
+
+    .waiting-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .total-badge {
+        padding: 5px 10px;
+        font-size: 0.85em;
+    }
+
+    .service-tracking-card {
+        padding: 18px;
+    }
+
+    .service-tracking-card h3 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+    }
+
+    .tracking-grid {
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tracking-item {
+        padding: 10px;
+    }
+
+    .tracking-item label {
+        font-size: 0.8em;
+        margin-bottom: 4px;
+    }
+
+    .tracking-value {
+        font-size: 1.1em;
+    }
+
+    .tracking-elapsed-row {
+        padding: 12px;
+    }
+
+    .tracking-elapsed-row .tracking-value {
+        font-size: 1.5em;
+    }
+
+    .service-tracking-section {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    .capsule-btn {
+        width: 100%;
+        align-self: stretch;
+    }
+
+    .actions {
+        gap: 10px;
+    }
+
+    .btn {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
+
+    .dashboard-section h2 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+    }
+
+    .waiting-section {
+        min-height: 150px;
+    }
+
+    #waitingList li {
+        padding: 10px 12px;
+        font-size: 1em;
+        margin-bottom: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 15px;
+    }
+
+    .header-content h1 {
+        font-size: 1.4em;
+    }
+
+    .header-content .subtitle {
+        font-size: 0.85em;
+    }
+
+    .container {
+        padding: 20px 10px;
+    }
+
+    .dashboard-section {
+        padding: 20px 15px;
+        border-radius: 12px;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .current-serving-card {
+        padding: 20px;
+        margin-bottom: 0;
+    }
+
+    .current-serving-card h2 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .current {
+        font-size: 2em;
+        letter-spacing: 2px;
+    }
+
+    .ticket-number {
+        padding: 10px 20px;
+        min-width: 100px;
+    }
+
+    .waiting-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .total-badge {
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+
+    .service-tracking-card {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .service-tracking-card h3 {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+
+    .tracking-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .tracking-item {
+        padding: 8px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .tracking-item label {
+        font-size: 0.75em;
+        margin-bottom: 0;
+    }
+
+    .tracking-value {
+        font-size: 0.95em;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+
+    .btn {
+        font-size: 0.9em;
+        padding: 10px 12px;
+    }
+
+    .dashboard-section h2 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+    }
+
+    .waiting-section {
+        min-height: 120px;
+        max-height: 300px;
+    }
+
+    #waitingList li {
+        padding: 8px 10px;
+        font-size: 0.95em;
+     countdown-display {
+        font-size: 0.9em;
+        padding: 5px 10px;
+        margin-top: 5px;
+    }
+
+    .countdown-value {
+        font-size: 1.1em;
+    }
+
+    .button-group {
+        gap: 6px
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .tracking-item {
+        padding: 6px;
+    }
+
+    .tracking-item label {
+        font-size: 0.7em;
+    }
+
+    .tracking-value {
+        font-size: 0.9em;
+    }
+
+    .waiting-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .total-badge {
+        padding: 3px 6px;
+        font-size: 0.75em;
+    }
+
+    .btn {
+        font-size: 0.85em;
+        padding: 8px 10px;
+    }
+}

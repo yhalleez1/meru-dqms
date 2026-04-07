@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - Digital Queue Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script>
+        // Check if staff is authenticated before loading page
+        if (!sessionStorage.getItem('staffId')) {
+            window.location.href = '/staff/login.html';
+        }
+    </script>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-content">
+                <h1>Digital Queue Management System</h1>
+                <p class="subtitle">Staff Dashboard</p>
+            </div>
+            <button class="logout-btn" onclick="doLogout()" style="position: absolute; top: 20px; right: 20px; padding: 8px 16px; background: #ff4757; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9em; font-weight: 600;">Logout</button>
+        </header>
+
+        <main class="container">
+            <div class="dashboard-section">
+                <!-- Column 1: Call Next and Skip -->
+                <div class="column column-actions">
+                    <div class="current-serving-card">
+                        <h2>Now Serving</h2>
+                        <div class="current">
+                            <span id="currentServing" class="ticket-number">---</span>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button id="callNextBtn" class="btn btn-primary">Call Next</button>
+                        <button id="skipBtn" class="btn btn-warning" style="display: none;">Skip (<span id="countdownValue">10</span>s)</button>
+                    </div>
+                </div>
+
+                <!-- Column 2: Service Tracking with Total Time -->
+                <div class="column column-tracking">
+                    <div class="service-tracking-section">
+                        <div class="service-tracking-card">
+                            <h3>Service Tracking</h3>
+                            <div class="tracking-grid">
+                                <div class="tracking-item">
+                                    <label>Start Time:</label>
+                                    <span id="startTime" class="tracking-value">---</span>
+                                </div>
+                                <div class="tracking-item">
+                                    <label>End Time:</label>
+                                    <span id="endTime" class="tracking-value">---</span>
+                                </div>
+                            </div>
+                            <div class="tracking-elapsed-row">
+                                <label>Time Elapsed:</label>
+                                <span id="timeElapsed" class="tracking-value blinking">00:00</span>
+                            </div>
+                        </div>
+                        <button id="totalTimeBtn" class="capsule-btn">Total Time: 00:00</button>
+                    </div>
+                </div>
+
+                <!-- Column 3: Waiting List -->
+                <div class="column column-waiting">
+                    <div class="waiting-header">
+                        <h2>Waiting Ticket Numbers</h2>
+                        <span class="total-badge">Total: <span id="totalWaiting">0</span></span>
+                    </div>
+                    <div class="waiting-section">
+                        <ul id="waitingList"></ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

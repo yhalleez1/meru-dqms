@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Queue Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0f;
+            --panel: #13131a;
+            --border: rgba(255,255,255,0.08);
+            --accent-staff: #00e5a0;
+            --accent-admin: #ff6b35;
+            --text: #f0f0f5;
+            --muted: #6b6b80;
+            --input-bg: #1c1c26;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        /* Ambient background blobs */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::before {
+            width: 400px; height: 400px;
+            background: var(--accent-staff);
+            top: -100px; left: -100px;
+            transition: background 0.5s ease;
+        }
+        body::after {
+            width: 350px; height: 350px;
+            background: var(--accent-admin);
+            bottom: -80px; right: -80px;
+            transition: background 0.5s ease;
+        }
+
+        .wrap {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            padding: 20px;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .brand h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5em;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text);
+        }
+
+        .brand p {
+            font-size: 0.85em;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        /* Role switcher */
+        .switcher {
+            display: flex;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .switcher-pill {
+            position: absolute;
+            top: 5px; left: 5px;
+            width: calc(50% - 5px);
+            height: calc(100% - 10px);
+            border-radius: 8px;
+            background: var(--accent-staff);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+            z-index: 0;
+        }
+
+        .switcher-pill.admin { transform: translateX(100%); background: var(--accent-admin); }
+
+        .role-btn {
+            flex: 1;
+            padding: 11px;
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+
+        .role-btn.active { color: #000; }
+
+        /* Card */
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px 32px;
+        }
+
+        .card-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .card-sub {
+            font-size: 0.85em;
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+
+        .field { margin-bottom: 18px; }
+
+        label {
+            display: block;
+            font-size: 0.78em;
+            font-weight: 500;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 13px 16px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95em;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus { border-color: var(--accent-staff); }
+        .admin-mode input:focus { border-color: var(--accent-admin); }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: var(--accent-staff);
+            color: #000;
+            font-family: 'Syne', sans-serif;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .login-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+        .login-btn:active { transform: translateY(0); }
+        .admin-mode .login-btn { background: var(--accent-admin); }
+
+        .error-msg {
+            background: rgba(255, 107, 53, 0.12);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: #ff9a7a;
+            padding: 11px 14px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            margin-top: 14px;
+            display: none;
+        }
+
+        .error-msg.show { display: block; }
+
+        /* Accent dot on brand */
+        .dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--accent-staff);
+            margin-left: 4px;
+            vertical-align: middle;
+            transition: background 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="brand">
+        <h1>QueueMS <span class="dot" id="brandDot"></span></h1>
+        <p>Digital Queue Management System</p>
+    </div>
+
+    <div class="switcher" id="switcher">
+        <div class="switcher-pill" id="pill"></div>
+        <button class="role-btn active" id="staffBtn" onclick="setRole('staff')">Staff</button>
+        <button class="role-btn" id="adminBtn" onclick="setRole('admin')">Admin</button>
+    </div>
+
+    <div class="card" id="card">
+        <div class="card-title" id="cardTitle">Staff Login</div>
+        <div class="card-sub" id="cardSub">Enter your credentials to access the dashboard</div>
+
+        <div class="field">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter username" autocomplete="username">
+        </div>
+        <div class="field">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter password" autocomplete="current-password">
+        </div>
+
+        <button class="login-btn" id="loginBtn" onclick="doLogin()">Sign In</button>
+        <div class="error-msg" id="errorMsg">Invalid username or password.</div>
+    </div>
+</div>
+
+<script>
+    const API_BASE = 'http://localhost:3000/api';
+    let currentRole = 'staff';
+
+    function setRole(role) {
+        currentRole = role;
+        const pill    = document.getElementById('pill');
+        const staffBtn = document.getElementById('staffBtn');
+        const adminBtn = document.getElementById('adminBtn');
+        const card    = document.getElementById('card');
+        const title   = document.getElementById('cardTitle');
+        const sub     = document.getElementById('cardSub');
+        const dot     = document.getElementById('brandDot');
+        const loginBtn = document.getElementById('loginBtn');
+
+        document.getElementById('errorMsg').classList.remove('show');
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+
+        if (role === 'admin') {
+            pill.classList.add('admin');
+            staffBtn.classList.remove('active');
+            adminBtn.classList.add('active');
+            card.classList.add('admin-mode');
+            title.innerText = 'Admin Login';
+            sub.innerText   = 'Access the administration panel';
+            dot.style.background = 'var(--accent-admin)';
+        } else {
+            pill.classList.remove('admin');
+            staffBtn.classList.add('active');
+            adminBtn.classList.remove('active');
+            card.classList.remove('admin-mode');
+            title.innerText = 'Staff Login';
+            sub.innerText   = 'Enter your credentials to access the dashboard';
+            dot.style.background = 'var(--accent-staff)';
+        }
+    }
+
+    async function doLogin() {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const errorMsg = document.getElementById('errorMsg');
+        const loginBtn = document.getElementById('loginBtn');
+
+        errorMsg.classList.remove('show');
+        if (!username || !password) {
+            errorMsg.innerText = 'Please enter username and password.';
+            errorMsg.classList.add('show');
+            return;
+        }
+
+        loginBtn.disabled = true;
+        loginBtn.innerText = 'Signing in...';
+
+        try {
+            if (currentRole === 'admin') {
+                // Hardcoded admin credentials
+                if (username === 'admin' && password === 'admin123') {
+                    // Store admin session
+                    sessionStorage.setItem('isAdmin', 'true');
+                    sessionStorage.setItem('adminName', 'System Administrator');
+                    window.location.href = '/staff/admin.html';
+                } else {
+                    errorMsg.innerText = 'Invalid admin credentials.';
+                    errorMsg.classList.add('show');
+                }
+            } else {
+                // Staff — authenticate via API
+                const res = await fetch(`${API_BASE}/staff/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    // Store staff session
+                    sessionStorage.setItem('staffId', data.id);
+                    sessionStorage.setItem('staffName', data.name);
+                    sessionStorage.setItem('officeId', data.officeId);
+                    sessionStorage.setItem('officeName', data.officeName);
+                    window.location.href = '/staff/index.html';
+                } else {
+                    errorMsg.innerText = 'Invalid username or password.';
+                    errorMsg.classList.add('show');
+                }
+            }
+        } catch (err) {
+            errorMsg.innerText = 'Connection error. Please try again.';
+            errorMsg.classList.add('show');
+        } finally {
+            loginBtn.disabled = false;
+            loginBtn.innerText = 'Sign In';
+        }
+    }
+
+    // Allow Enter key
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Enter') doLogin();
+    });
+</script>
+</body>
+</html>

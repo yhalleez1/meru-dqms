@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Queue Management System</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #0f172a;
+    color: white;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+.display {
+    margin: 30px auto;
+    padding: 20px;
+    width: 300px;
+    border-radius: 15px;
+    background: #1e293b;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.number {
+    font-size: 60px;
+    color: #38bdf8;
+}
+
+.counter {
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
+    width: 120px;
+    text-align: center;
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 18px;
+    background: #22c55e;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+button:hover {
+    background: #16a34a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Queue System</h1>
+
+    <div class="display">
+        <div class="number" id="displayNumber">---</div>
+        <div class="counter" id="displayCounter">Counter -</div>
+    </div>
+
+    <div>
+        <input type="text" id="numberInput" placeholder="Number">
+        <input type="text" id="counterInput" placeholder="Counter">
+    </div>
+
+    <button onclick="callNext()">Call Number</button>
+</div>
+
+<!-- 🔊 Beep Sound -->
+<audio id="beepSound" src="beep.mp3"></audio>
+
+<script>
+function callNext() {
+    let number = document.getElementById("numberInput").value || "001";
+    let counter = document.getElementById("counterInput").value || "1";
+
+    // Update display
+    document.getElementById("displayNumber").innerText = number;
+    document.getElementById("displayCounter").innerText = "Counter " + counter;
+
+    // 🔊 Play beep
+    let beep = document.getElementById("beepSound");
+    beep.play();
+
+    // Speak after beep
+    setTimeout(() => {
+        let text = `Attention please. Number ${number}, kindly proceed to counter ${counter}`;
+
+        let speech = new SpeechSynthesisUtterance(text);
+
+        speech.rate = 0.8;   // slower speech
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        speechSynthesis.speak(speech);
+    }, 500);
+}
+</script>
+
+</body>
+</html>
