@@ -175,7 +175,7 @@ curl -X POST http://localhost:3000/api/served/42 \
 
 2. DATABASE_URL is correct in `.env`:
    ```env
-   DATABASE_URL=postgresql://haron:92949698@localhost:5432/meru-dqms
+   DATABASE_URL=postgresql://xxxxxx:xxxxxx@localhost:5432/meru-dqms
    ```
 
 3. Database exists:

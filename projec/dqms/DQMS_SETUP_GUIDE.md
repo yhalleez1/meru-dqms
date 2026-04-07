@@ -244,7 +244,7 @@ The SMS should be sent immediately to the student's phone.
 ### .env File
 ```env
 PORT=3000
-DATABASE_URL=postgresql://haron:92949698@localhost:5432/meru-dqms
+DATABASE_URL=postgresql://xxxxxx:xxxxxx@localhost:5432/meru-dqms
 
 # SMS Configuration (Mobitech API)
 SMS_API_URL=https://app.mobitechtechnologies.com/sms/sendsms

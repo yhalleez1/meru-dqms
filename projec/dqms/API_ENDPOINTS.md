@@ -446,8 +446,8 @@ POST /api/staff/login
 **Body:**
 ```json
 {
-  "username": "john_smith",
-  "password": "password123"
+  "username": "xxxxxx",
+  "password": "xxxxxx"
 }
 ```
 **Response:**

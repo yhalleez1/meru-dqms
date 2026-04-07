@@ -377,7 +377,7 @@ curl -X POST http://localhost:3000/api/register \
 ```bash
 curl -X POST http://localhost:3000/api/staff/login \
   -H "Content-Type: application/json" \
-  -d '{"username": "john", "password": "pass123"}' | jq
+  -d '{"username": "xxxxxx", "password": "xxxxxx"}' | jq
 ```
 
 **Get Queue**

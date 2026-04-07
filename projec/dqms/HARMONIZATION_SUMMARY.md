@@ -240,8 +240,8 @@ All POST/PUT requests include required fields:
   "officeId": "required-for-all-queue-ops",
   "ticketNumber": "when-modifying-tickets",
   "elapsedSeconds": "when-tracking-time",
-  "username": "for-authentication",
-  "password": "for-authentication"
+  "username": "xxxxxx",
+  "password": "xxxxxx"
 }
 ```
 
