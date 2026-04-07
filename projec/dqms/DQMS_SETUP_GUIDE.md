@@ -30,7 +30,7 @@ A new SMS service module has been created: `server/services/smsService.js`
 ```javascript
 const { sendTicketNotification } = require('../services/smsService');
 
-await sendTicketNotification('+254797074165', 42, 'John Doe', 'Main Office');
+await sendTicketNotification('xxxxxx', 42, 'John Doe', 'Main Office');
 // Sends: "Hi John Doe, your ticket #42 is ready at Main Office. Please proceed to the counter."
 ```
 
@@ -51,7 +51,7 @@ POST /api/register
 **Request Body:**
 ```json
 {
-  "dqmsNumber": "HARON-OYNGO",
+  "dqmsNumber": "xxxxxx",
   "officeId": 1
 }
 ```
@@ -62,12 +62,12 @@ POST /api/register
   "success": true,
   "message": "DQMS registered successfully",
   "data": {
-    "dqms_number": "HARON-OYNGO",
+    "dqms_number": "xxxxxx",
     "office_id": 1,
     "office_name": "Main Office",
-    "student_name": "Haron Oyngo",
-    "phone_number": "+254797074165",
-    "student_id": "41150479",
+    "student_name": "xxxxxx",
+    "phone_number": "xxxxxx",
+    "student_id": "xxxxxx",
     "ticket_number": 42,
     "ticket_sent": false
   }
@@ -139,7 +139,7 @@ chmod +x manage-students.sh
 
 This script:
 - Clears all existing student records
-- Adds Haron Oyngo (phone: +254797074165, ID: 41150479)
+- Adds xxxxxx (phone: xxxxxx, ID: xxxxxx)
 
 ### Step 3: Install Dependencies
 ```bash
@@ -212,7 +212,7 @@ DELETE /api/offices/:id - Delete office
 curl -X POST http://localhost:3000/api/register \
   -H "Content-Type: application/json" \
   -d '{
-    "dqmsNumber": "HARON-OYNGO",
+    "dqmsNumber": "xxxxxx",
     "officeId": 1
   }'
 ```
@@ -223,12 +223,12 @@ curl -X POST http://localhost:3000/api/register \
   "success": true,
   "message": "DQMS registered successfully",
   "data": {
-    "dqms_number": "HARON-OYNGO",
+    "dqms_number": "xxxxxx",
     "office_id": 1,
     "office_name": "Main Office",
-    "student_name": "Haron Oyngo",
-    "phone_number": "+254797074165",
-    "student_id": "41150479",
+    "student_name": "xxxxxx",
+    "phone_number": "xxxxxx",
+    "student_id": "xxxxxx",
     "ticket_number": 1,
     "ticket_sent": false
   }

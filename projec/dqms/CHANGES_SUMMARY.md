@@ -101,7 +101,7 @@ chmod +x init-database-tables.sh
 **Functions**:
 - Creates `students` table if doesn't exist
 - Clears all student records
-- Adds default student: Haron Oyngo (0797074165, ID: 41150479)
+- Adds default student: xxxxxx (xxxxxx, ID: xxxxxx)
 
 **Usage**:
 ```bash
@@ -195,7 +195,7 @@ POST /api/register             → Complete flow: Student lookup → Ticket → 
 ```
 POST /api/register
 Body: {
-  "dqmsNumber": "HARON-OYNGO",
+  "dqmsNumber": "xxxxxx",
   "officeId": 1
 }
 ```
@@ -206,12 +206,12 @@ Body: {
   "success": true,
   "message": "DQMS registered successfully",
   "data": {
-    "dqms_number": "HARON-OYNGO",
+    "dqms_number": "xxxxxx",
     "office_id": 1,
     "office_name": "Main Office",
-    "student_name": "Haron Oyngo",
-    "phone_number": "+254797074165",
-    "student_id": "41150479",
+    "student_name": "xxxxxx",
+    "phone_number": "xxxxxx",
+    "student_id": "xxxxxx",
     "ticket_number": 42,
     "ticket_sent": false
   }
@@ -244,7 +244,7 @@ Body: {
    ```bash
    curl -X POST http://localhost:3000/api/register \
      -H "Content-Type: application/json" \
-     -d '{"dqmsNumber":"HARON-OYNGO","officeId":1}'
+     -d '{"dqmsNumber":"xxxxxx","officeId":1}'
    ```
 
 ## Backward Compatibility
@@ -262,7 +262,7 @@ Body: {
    ```bash
    curl -X POST http://localhost:3000/api/register \
      -H "Content-Type: application/json" \
-     -d '{"dqmsNumber":"HARON-OYNGO","officeId":1}'
+     -d '{"dqmsNumber":"xxxxxx","officeId":1}'
    ```
    Expected: ✅ Success with ticket number, SMS sent
 
@@ -286,8 +286,8 @@ Body: {
 
 Check server logs for SMS delivery status:
 ```
-📱 Sending SMS to +254797074165...
-✅ SMS sent successfully to +254797074165
+📱 Sending SMS to xxxxxx...
+✅ SMS sent successfully to xxxxxx
 ```
 
 ## Notes

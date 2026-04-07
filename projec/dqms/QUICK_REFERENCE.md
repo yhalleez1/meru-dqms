@@ -19,7 +19,7 @@ npm start
 ```bash
 curl -X POST http://localhost:3000/api/register \
   -H "Content-Type: application/json" \
-  -d '{"dqmsNumber":"HARON-OYNGO","officeId":1}'
+  -d '{"dqmsNumber":"xxxxxx","officeId":1}'
 ```
 
 ---
@@ -45,7 +45,7 @@ curl http://localhost:3000/api/students
 
 ### Get Student by DQMS Number
 ```bash
-curl http://localhost:3000/api/students/by-dqms/HARON-OYNGO
+curl http://localhost:3000/api/students/by-dqms/xxxxxx
 ```
 
 ### Update Student
@@ -102,7 +102,7 @@ curl -X POST http://localhost:3000/api/served/42 \
 
 2. Phone number is in correct format (E.164: +254XXXXXXXXX)
    ```
-   ✅ Correct:   +254797074165
+   ✅ Correct:   xxxxxx
    ❌ Wrong:     254797074165 (missing +)
    ❌ Wrong:     +254 797 074 165 (has spaces)
    ```
@@ -110,7 +110,7 @@ curl -X POST http://localhost:3000/api/served/42 \
 3. Check server logs for SMS errors:
    ```bash
    # Look for these messages:
-   📱 Sending SMS to +254797074165...
+   📱 Sending SMS to xxxxxx...
    ✅ SMS sent successfully
    # or
    ❌ Failed to send SMS
@@ -127,12 +127,12 @@ curl -X POST http://localhost:3000/api/served/42 \
 **Check**:
 1. Student exists in database:
    ```bash
-   curl http://localhost:3000/api/students/by-dqms/HARON-OYNGO
+   curl http://localhost:3000/api/students/by-dqms/xxxxxx
    ```
 
 2. DQMS number is correct (case-sensitive):
    ```
-   ✅ Correct:   HARON-OYNGO
+   ✅ Correct:   xxxxxx
    ❌ Wrong:     haron-oyngo
    ❌ Wrong:     Haron-Oyngo
    ```
@@ -287,7 +287,7 @@ curl -X POST https://app.mobitechtechnologies.com/sms/sendsms \
   -H "h_api_key: YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "mobile":"+254797074165",
+    "mobile":"xxxxxx",
     "response_type":"json",
     "sender_name":"FULL_CIRCLE",
     "service_id":0,
@@ -327,7 +327,7 @@ For high-traffic systems, implement Redis caching layer.
 - [ ] `.env` file configured with correct credentials
 - [ ] SMS API key is active and working
 - [ ] Database tables created: `students`, `dqms_records`
-- [ ] Test student "HARON-OYNGO" added
+- [ ] Test student "xxxxxx" added
 - [ ] At least one office created
 - [ ] PostgreSQL backups configured
 - [ ] SMS delivery logging enabled
@@ -355,10 +355,10 @@ After running `manage-students.sh`:
 
 | Field | Value |
 |-------|-------|
-| DQMS Number | HARON-OYNGO |
-| Phone | +254797074165 |
-| Name | Haron Oyngo |
-| ID | 41150479 |
+| DQMS Number | xxxxxx |
+| Phone | xxxxxx |
+| Name | xxxxxx |
+| ID | xxxxxx |
 | Status | Active |
 
 ---
